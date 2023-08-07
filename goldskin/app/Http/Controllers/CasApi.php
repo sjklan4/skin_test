@@ -23,8 +23,8 @@ class CasApi extends Controller
             $item_arr = json_decode($json, true);
             $items = $item_arr['body']['items']['item'];
 
-            // dump($items);
-            // exit;
+            dump($items);
+            exit;
 
             foreach($items as $item){
                 $chemist_list = new chemist_list();
