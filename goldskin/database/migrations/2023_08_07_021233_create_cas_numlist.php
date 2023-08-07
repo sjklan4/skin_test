@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('Cas_Numlist', function (Blueprint $table) {
-            $table->id('No')->autoIncrement()->primary();
-            $table->VARCHAR('Cas_Num',1000)->nullable();
-            $table->VARCHAR('chemistry_name',10000)->nullable();
+            $table->id('No')->autoIncrement();
+            $table->CHAR('Cas_Num',255)->nullable();
+            $table->CHAR('chemistry_name',255)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

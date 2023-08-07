@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('chemist_list', function (Blueprint $table) {
-            $table->id('dataNo');
+            $table->increments('chem_num');
+            $table->string('dataNo',1000);
             $table->string('chemEn',1000);
             $table->string('chemKo',1000);
             $table->string('casNo',1000);
