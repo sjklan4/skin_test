@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_list_table', function (Blueprint $table) {
-            $table->integer('product_id')->autoIncrement()->primary();
-            $table->varchar('product_name',300)->notnull();
-            $table->varchar('URL',2000)->nullable();
-            $table->varchar('ingredient_name', 10000)->notnull();
+        Schema::create('Cas_Numlist', function (Blueprint $table) {
+            $table->id('No')->autoIncrement()->primary();
+            $table->VARCHAR('Cas_Num',1000)->nullable();
+            $table->VARCHAR('chemistry_name',10000)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('_cas_numlist');
     }
 };
