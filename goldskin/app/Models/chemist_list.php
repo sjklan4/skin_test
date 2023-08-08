@@ -12,4 +12,6 @@ class chemist_list extends Model
     protected $table = 'chemist_list';
     protected  $primaryKey = 'chem_num';
 
+    public $timestamps = false;
+
 }

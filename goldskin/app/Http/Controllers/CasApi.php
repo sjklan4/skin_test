@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\chemist_list;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use SimpleXMLElement;
 
 class CasApi extends Controller
@@ -21,12 +22,19 @@ class CasApi extends Controller
             $xml = new SimpleXMLElement($xmlString);
             $json = json_encode($xml);
             $item_arr = json_decode($json, true);
-            $items = $item_arr['body']['items']['item'];
+            // $itembody =  $item_arr['body'];
+            // $items = $item_arr['body']['items'];
+            $itemsarr = $item_arr['body']['items']['item'];
+            // ['item']
+            // log::debug("items", $items);
+            // dump($itembody);
+            // dump($items);
+            // dump($itemsarr);
+            // exit;
 
-            dump($items);
-            exit;
-
-            foreach($items as $item){
+            foreach($itemsarr as $item){
+                // Log::debug("item", $item);
+                // exit;
                 $chemist_list = new chemist_list();
                 $chemist_list->dataNo = $item['dataNo'];
                 $chemist_list->chemEn = $item['chemEn'];
@@ -49,6 +57,53 @@ class CasApi extends Controller
         exit;
     }
 }
+// class CasApi extends Controller
+// {
+//     public function casNo_info(Request $request)
+//     {
+//         $apiUrl = "http://apis.data.go.kr/1480802/iciskischem/kischemlist?ServiceKey=482efjL2aYfjc5K7hpg7NJ2V02Z%2BugMaWnF%2BU%2FWs6Dk0f1X87AnYj5PenbF643s5HAwqT0lbFE%2B7dP0HkwXepQ%3D%3D&numOfRows=100&pageNo=10";
+
+//         try {
+//             $xmlString = file_get_contents($apiUrl);
+//             if ($xmlString === false) {
+//                 throw new Exception('Failed to load XML from URL');
+//             }
+
+//             $xml = new SimpleXMLElement($xmlString);
+//             $json = json_encode($xml);
+//             $item_arr = json_decode($json, true);
+
+//             $items = isset($item_arr['body']['items']['item']) ? $item_arr['body']['items']['item'] : [];
+
+//             // items 내부의 item이 하나만 있을 경우를 위한 처리
+//             if (isset($items['dataNo'])) {
+//                 $items = [$items];
+//             }
+
+//             foreach ($items as $item) {
+//                 $chemist_list = new chemist_list();
+//                 $chemist_list->dataNo = $item['dataNo'];
+//                 $chemist_list->chemEn = $item['chemEn'];
+//                 $chemist_list->chemKo = $item['chemKo'];
+//                 $chemist_list->casNo = $item['casNo'];
+//                 $chemist_list->symptom = $item['symptom'];
+//                 $chemist_list->inhale = $item['inhale'];
+//                 $chemist_list->skin = $item['skin'];
+//                 $chemist_list->eyeball = $item['eyeball'];
+//                 $chemist_list->oral = $item['oral'];
+//                 $chemist_list->etc = $item['etc'];
+
+//                 $chemist_list->save();
+//             }
+
+//         } catch (Exception $e) {
+//             return response()->json(['error' => $e->getMessage()]);
+//         }
+
+//         return response()->json(['message' => 'Data saved successfully']);
+//     }
+// }
+
 
 
 // xml 디코딩 절차 
