@@ -14,4 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//공공데이터 화학물질 정보 받아오는 라우터
 Route::get('/casinfo',[CasApi::class, 'casNo_info'])->name('cas.info');
+
+//
